@@ -1,6 +1,7 @@
+import DataMustahik from "@/components/views/DataMustahik/DataMustahik";
 
-export default function DataPage() {
+export default function DataMustahikPage() {
   return (
-    <div>page</div>
+    <DataMustahik />
   )
 }

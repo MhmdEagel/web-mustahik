@@ -1,5 +1,6 @@
 "use client";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   Sidebar,
   SidebarContent,
@@ -14,6 +15,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { SidebarItems } from "@/types/Dashboard";
+import { User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -35,6 +37,9 @@ export default function DashboardSidebar(props: PropTypes) {
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
               <div>
+                <Avatar>
+                  <AvatarFallback><User size={15} /></AvatarFallback>
+                </Avatar>
                 <span className="text-lg font-semibold text-primary">
                   Admin IZI
                 </span>
