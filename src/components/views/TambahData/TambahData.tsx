@@ -1,157 +1,249 @@
+"use client";
+
+import { Card } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { useTambahData } from "./useTambahData";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { format } from "date-fns";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { KOTA_KABUPATEN_LIST } from "@/components/constants/kota-kabupaten.constant";
+import MoneyInput from "@/components/ui/money-input";
+import DatePicker from "@/components/ui/date-picker";
+
 export default function TambahData() {
+  const { form, router, handleTambahData } = useTambahData();
   return (
-    <div>
-      <div className="max-w-4xl mx-auto p-8 bg-white rounded shadow-lg">
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block mb-1 text-sm font-medium">NIK</label>
-            <input
-              type="text"
-              placeholder="12345xxxx"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
+    <Card className="p-8">
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(handleTambahData)}
+          className={cn("grid grid-cols-1 md:grid-cols-2 gap-4")}
+        >
+          <FormField
+            control={form.control}
+            name="nik"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>NIK</FormLabel>
+                <FormControl>
+                  <Input placeholder="NIK" {...field} value={field.value} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="namaJalan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nama Jalan</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Nama Jalan"
+                    {...field}
+                    value={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="nama"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nama</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nama" {...field} value={field.value} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="jenisBantuan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Jenis Bantuan</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Pilih Jenis Bantuan" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="kesehatan">Kesehatan</SelectItem>
+                      <SelectItem value="pendidikan">Makanan</SelectItem>
+                      <SelectItem value="sosial">Sosial</SelectItem>
+                      <SelectItem value="dakwah">Dakwah</SelectItem>
+                      <SelectItem value="ekonomi">Ekonomi</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div>
-            <label className="block mb-1 text-sm font-medium">Nama Jalan</label>
-            <input
-              type="text"
-              placeholder="Nama Jalan"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">Nama</label>
-            <input
-              type="text"
-              placeholder="John Doe"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">
-              Jenis Bantuan
-            </label>
-            <select className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2">
-              <option value="">Pilih Jenis Bantuan</option>
-              <option value="sembako">Kesehatan</option>
-              <option value="uang">Pendidikan</option>
-              <option value="uang">Sosial</option>
-              <option value="uang">Dakwah</option>
-              <option value="uang">Ekonomi</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">
-              Nomor Telepon
-            </label>
-            <input
-              type="text"
-              placeholder="08123xxx"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">
-              Jumlah Bantuan
-            </label>
-            <input
-              type="text"
-              placeholder="Jumlah Bantuan"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">
-              Kota/Kabupaten
-            </label>
-            <select className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2">
-              <option value="">Pilih Kota/Kabupaten</option>
-              <option value="pekanbaru">Pekanbaru</option>
-              <option value="dumai">Dumai</option>
-              <option value="bengkalis">Kabupaten Bengkalis</option>
-              <option value="indragiri-hilir">Kabupaten Indragiri Hilir</option>
-              <option value="indragiri-hulu">Kabupaten Indragiri Hulu</option>
-              <option value="kampar">Kabupaten Kampar</option>
-              <option value="kuantan-singingi">Kabupaten Kuantan Singingi</option>
-              <option value="pelalawan">Kabupaten Pelalawan</option>
-              <option value="rokan-hilir">Kabupaten Rokan Hilir</option>
-              <option value="rokan-hulu">Kabupaten Rokan Hulu</option>
-              <option value="siak">Kabupaten Siak</option>
-              <option value="kepulauan-meranti">
-                Kabupaten Kepulauan Meranti
-              </option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">Tanggal</label>
-            <input
-              type="date"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">Kecamatan</label>
-            <input
-              type="text"
-              placeholder="Kecamatan"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">
-              Nama Penerima Laporan
-            </label>
-            <input
-              type="text"
-              placeholder="Nama Penerima Laporan"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">Kelurahan</label>
-            <input
-              type="text"
-              placeholder="Kelurahan"
-              className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1 text-sm font-medium">Status</label>
-            <select className="w-full rounded-md border border-gray-300 bg-gray-100 px-4 py-2">
-              <option value="">Status</option>
-              <option value="diterima">Terverifikasi</option>
-              <option value="diproses">Tidak Terferifikasi</option>
-              <option value="ditolak">Sudah Menerima Bantuan</option>
-            </select>
+          <FormField
+            control={form.control}
+            name="nomorTelepon"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nomor Telepon</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Nomor Telepon"
+                    {...field}
+                    value={field.value}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <MoneyInput
+            form={form}
+            label="Jumlah Bantuan"
+            name="jumlahBantuan"
+            placeholder="Jumlah Bantuan"
+          />
+          <FormField
+            control={form.control}
+            name="kota"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Kota/ Kabupaten</FormLabel>
+                <FormControl>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Pilih Kota/Kabupaten" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {KOTA_KABUPATEN_LIST.map((item) => (
+                        <SelectItem key={item.key} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <DatePicker form={form} />
+          <FormField
+            control={form.control}
+            name="kecamatan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Kecamatan</FormLabel>
+                <FormControl>
+                  <Input placeholder="Kecamatan" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="namaPenerimaLaporan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nama Penerima Laporan</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nama Penerima Laporan" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="kelurahan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Kelurahan</FormLabel>
+                <FormControl>
+                  <Input placeholder="Kelurahan" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Status</FormLabel>
+                <FormControl>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Pilih Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="terverifikasi">
+                        Terverifikasi
+                      </SelectItem>
+                      <SelectItem value="belum_terverifikasi">
+                        Belum Terverifikasi
+                      </SelectItem>
+                      <SelectItem value="sudah_menerima">
+                        Sudah Menerima Bantuan
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex justify-end col-span-2 space-x-4">
+            <Button
+              type="button"
+              onClick={() => router.push("/dashboard")}
+              className="px-6 py-2 bg-[#E7000B] hover:bg-[#E7000B]/70 text-white rounded-lg"
+            >
+              Batal
+            </Button>
+            <Button
+              type="submit"
+              className="px-6 py-2 bg-[#157145] hover:bg-[#157145]/70 text-white rounded-lg"
+            >
+              Simpan
+            </Button>
           </div>
         </form>
-
-        <div className="flex justify-end mt-8 space-x-4">
-          <button
-            type="button"
-            className="px-6 py-2 bg-[#E7000B] text-white rounded-lg"
-          >
-            Batal
-          </button>
-          <button
-            type="submit"
-            className="px-6 py-2 bg-[#157145] text-white rounded-lg"
-          >
-            Simpan
-          </button>
-        </div>
-      </div>
-    </div>
+      </Form>
+    </Card>
   );
 }

@@ -16,11 +16,9 @@ import {
 } from "@/components/ui/sidebar";
 import { SidebarItems } from "@/types/Dashboard";
 import { User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-
-
 
 interface PropTypes {
   sidebarItems?: SidebarItems[];
@@ -38,11 +36,11 @@ export default function DashboardSidebar(props: PropTypes) {
             <SidebarMenuButton asChild>
               <div>
                 <Avatar>
-                  <AvatarFallback><User size={15} /></AvatarFallback>
+                  <AvatarFallback className="bg-slate-300">
+                    <User size={15} />
+                  </AvatarFallback>
                 </Avatar>
-                <span className="text-lg font-semibold text-primary">
-                  Admin IZI
-                </span>
+                <span className="text-lg font-semibold">Admin IZI</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -61,12 +59,19 @@ export default function DashboardSidebar(props: PropTypes) {
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((item) => (
-                      <SidebarMenuSubItem key={item.key}>
-                        <SidebarMenuSubButton asChild >
-                          <Link href={`${item.href}`}>
-                          {item.icon}
-                          {item.label}
-                          </Link>
+                      <SidebarMenuSubItem className="cursor-pointer" key={item.key}>
+                        <SidebarMenuSubButton asChild>
+                          {item.href ? (
+                            <Link href={`${item.href}`}>
+                              {item.icon}
+                              {item.label}
+                            </Link>
+                          ) : (
+                            <div>
+                              {item.icon}
+                              {item.label}
+                            </div>
+                          )}
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
                     ))}
@@ -77,7 +82,14 @@ export default function DashboardSidebar(props: PropTypes) {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="pb-4">
+        <Image
+          className="block mx-auto"
+          src={"/images/logo_izi_2.png"}
+          width={100}
+          height={100}
+          alt="logo Izi"
+        />
       </SidebarFooter>
     </Sidebar>
   );

@@ -4,11 +4,11 @@ export const DASHBOARD_TITLE = [
     title: "Data Mustahik",
   },
   {
-    path: "/dashboard/tambah",
+    path: "/dashboard/tambah-data",
     title: "Tambah Data",
   },
   {
-    path: "/dashboard/edit",
+    path: "/dashboard/edit-data",
     title: "Edit Data",
   },
   {
