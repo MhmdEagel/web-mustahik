@@ -9,6 +9,7 @@ import {
 } from "../ui/form"; // Shadcn UI import
 import { Input } from "../ui/input"; // Shandcn UI Input
 import { UseFormReturn } from "react-hook-form";
+import { moneyFormatter } from "@/lib/utils";
 
 type TextInputProps = {
   form: UseFormReturn<any>;
@@ -16,13 +17,6 @@ type TextInputProps = {
   label: string;
   placeholder: string;
 };
-
-const moneyFormatter = Intl.NumberFormat("id-ID", {
-  currency: "IDR",
-  style: "currency",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 export default function MoneyInput(props: TextInputProps) {
   const initialValue = props.form.getValues()[props.name]

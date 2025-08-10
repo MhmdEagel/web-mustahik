@@ -9,7 +9,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useTambahData } from "./useTambahData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -19,22 +18,32 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { format } from "date-fns";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { useEditDataForm } from "./useEditDataForm";
 import { KOTA_KABUPATEN_LIST } from "@/components/constants/kota-kabupaten.constant";
 import MoneyInput from "@/components/ui/money-input";
-import DatePicker from "@/components/ui/date-picker";
-import { Spinner } from "@/components/ui/spinner";
+import { Mustahik } from "@/types/Data";
 
-export default function TambahData() {
-  const { form, router, handleTambahData, isPending } = useTambahData();
-
-  console.log(form.formState.errors);
-
+export default function EdiDataForm({
+  mustahikData,
+}: {
+  mustahikData: Mustahik;
+}) {
+  const { form, router, handleEditData } = useEditDataForm({ mustahikData });
   return (
     <Card className="p-8">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleTambahData)}
-          className="flex flex-col lg:grid  lg:grid-cols-2 gap-4"
+          onSubmit={form.handleSubmit(handleEditData)}
+          className={cn("grid grid-cols-1 md:grid-cols-2 gap-4")}
         >
           <FormField
             control={form.control}
@@ -46,7 +55,7 @@ export default function TambahData() {
                   <Input
                     placeholder="NIK"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -63,7 +72,7 @@ export default function TambahData() {
                   <Input
                     placeholder="Nama Jalan"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -80,7 +89,7 @@ export default function TambahData() {
                   <Input
                     placeholder="Nama"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -96,7 +105,7 @@ export default function TambahData() {
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
-                    defaultValue={field.value || ""}
+                    value={field.value ?? ""}
                   >
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih Jenis Bantuan" />
@@ -125,7 +134,7 @@ export default function TambahData() {
                   <Input
                     placeholder="Nomor Telepon"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -145,16 +154,13 @@ export default function TambahData() {
               <FormItem>
                 <FormLabel>Kota/ Kabupaten</FormLabel>
                 <FormControl>
-                  <Select
-                    onValueChange={field.onChange}
-                    value={field.value || ""}
-                  >
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih Kota/Kabupaten" />
                     </SelectTrigger>
                     <SelectContent>
                       {KOTA_KABUPATEN_LIST.map((item) => (
-                        <SelectItem key={item.key} value={item.value}>
+                        <SelectItem key={item.value} value={item.value}>
                           {item.label}
                         </SelectItem>
                       ))}
@@ -165,7 +171,45 @@ export default function TambahData() {
               </FormItem>
             )}
           />
-          <DatePicker form={form} />
+          <FormField
+            control={form.control}
+            name="tanggal"
+            render={({ field }) => (
+              <FormItem className="flex flex-col items-start">
+                <FormLabel>Tanggal</FormLabel>
+                {/* popover */}
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      {field.value ? (
+                        format(field.value, "PPP")
+                      ) : (
+                        <span>Pilih Tanggal</span>
+                      )}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="kecamatan"
@@ -176,7 +220,7 @@ export default function TambahData() {
                   <Input
                     placeholder="Kecamatan"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -193,7 +237,7 @@ export default function TambahData() {
                   <Input
                     placeholder="Nama Penerima Laporan"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -210,7 +254,7 @@ export default function TambahData() {
                   <Input
                     placeholder="Kelurahan"
                     {...field}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   />
                 </FormControl>
                 <FormMessage />
@@ -226,10 +270,10 @@ export default function TambahData() {
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
-                    value={field.value || ""}
+                    value={field.value ?? ""}
                   >
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Pilih Status" />
+                      <SelectValue placeholder="Pilih Jenis Bantuan" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="terverifikasi">
@@ -257,11 +301,10 @@ export default function TambahData() {
               Batal
             </Button>
             <Button
-              disabled={isPending}
               type="submit"
               className="px-6 py-2 bg-[#157145] hover:bg-[#157145]/70 text-white rounded-lg"
             >
-              {isPending ? <Spinner color="white" variant="circle" /> : "Simpan"}
+              Simpan
             </Button>
           </div>
         </form>

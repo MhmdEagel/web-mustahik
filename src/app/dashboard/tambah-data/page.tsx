@@ -1,4 +1,8 @@
 import TambahData from '@/components/views/TambahData/TambahData'
+import { createMetadata } from '@/lib/utils';
+
+export const generateMetadata = () => createMetadata({ title: "Tambah Data" });
+
 
 export default function TambahDataPage() {
   return (

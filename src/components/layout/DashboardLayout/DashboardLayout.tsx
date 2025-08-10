@@ -23,8 +23,8 @@ export default function DashboardLayout(props: PropTypes) {
     >
       {/* user={user} */}
       <DashboardSidebar sidebarItems={SIDEBAR_ITEMS} />
-      <SidebarInset>
-        <div className="flex h-screen flex-col overflow-hidden">
+      <SidebarInset className="overflow-hidden">
+        <div className="flex h-screen flex-col overflow-hidden ">
           <DashboardHeader />
           <main className="flex flex-1 flex-col p-4 overflow-y-auto">
             {children}

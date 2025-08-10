@@ -8,6 +8,10 @@ export const DASHBOARD_TITLE = [
     title: "Tambah Data",
   },
   {
+    path: "/dashboard/detail-data",
+    title: "Detail Data",
+  },
+  {
     path: "/dashboard/edit-data",
     title: "Edit Data",
   },

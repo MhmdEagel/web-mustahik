@@ -14,14 +14,14 @@ datasource db {
 }
 
 model Mustahik {
-  id String @id @default(uuid())
-  nik String
+  id String @id @default(cuid())
+  NIK String
   nama String
-  nomorTelepon String
+  nomor_telepon String
   alamat String
-  jenisBantuan String
-  jumlahBantuan Int
+  jenis_bantuan String
+  jumlah_bantuan Int
   tanggal DateTime
-  namaPenerimaLaporan String
+  nama_penerima_laporan String
   status String
 }

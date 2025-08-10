@@ -1,13 +1,13 @@
 interface Mustahik {
-    nik: string;
+    id?: string;
+    NIK: string;
     nama: string;
-    nomorTelepon: string;
+    nomor_telepon: string;
     alamat: string;
-    jenisBantuan: string;
-    jumlahBantuan: number ;
+    jenis_bantuan: string;
+    jumlah_bantuan: number ;
     tanggal: Date;
-    namaPenerimaLaporan: string;
+    nama_penerima_laporan: string;
     status: string;
 }
-
 export type {Mustahik}
