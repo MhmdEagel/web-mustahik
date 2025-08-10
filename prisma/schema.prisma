@@ -14,20 +14,36 @@ datasource db {
 }
 
 model User {
-  id String @id @default(cuid())
-  email String @unique
-  password String
+  id                    String                 @id @default(cuid())
+  email                 String                 @unique
+  password              String
+  isTwoFactorEnabled    Boolean                @default(true)
+  twoFactorConfirmation TwoFactorConfirmation?
 }
 
 model Mustahik {
-  id String @id @default(cuid())
-  NIK String
-  nama String
-  nomor_telepon String
-  alamat String
-  jenis_bantuan String
-  jumlah_bantuan Int
-  tanggal DateTime
+  id                    String   @id @default(cuid())
+  NIK                   String
+  nama                  String
+  nomor_telepon         String
+  alamat                String
+  jenis_bantuan         String
+  jumlah_bantuan        Int
+  tanggal               DateTime
   nama_penerima_laporan String
-  status String
+  status                String
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

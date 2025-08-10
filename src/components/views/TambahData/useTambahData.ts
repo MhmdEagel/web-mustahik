@@ -61,7 +61,10 @@ export const useTambahData = () => {
 
       // console.log(newMustahikObj)
       const res = await tambahData(newMustahikObj);
-      if (res.success) router.push("/dashboard");
+      if (res.success) {
+        toast.success(res.success)
+        router.push("/dashboard");
+      }
     } catch (e) {
       toast.error((e as Error).message);
     } finally {

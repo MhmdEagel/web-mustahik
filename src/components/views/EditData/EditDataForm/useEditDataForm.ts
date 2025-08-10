@@ -59,7 +59,6 @@ export const useEditDataForm = ({
         nama_penerima_laporan,
       } = data;
 
-
       const alamatString = generateAlamatString(
         kota,
         kecamatan,
@@ -80,7 +79,10 @@ export const useEditDataForm = ({
       };
 
       const res = await editData(id, newMustahikObj);
-      if (res.success) router.push("/dashboard");
+      if (res.success) {
+        toast.success(res.success);
+        router.push("/dashboard");
+      }
     } catch (e) {
       toast.error((e as Error).message);
     } finally {
@@ -92,6 +94,6 @@ export const useEditDataForm = ({
     form,
     router,
     isPending,
-    handleEditData
+    handleEditData,
   };
 };

@@ -31,13 +31,16 @@ import { useEditDataForm } from "./useEditDataForm";
 import { KOTA_KABUPATEN_LIST } from "@/components/constants/kota-kabupaten.constant";
 import MoneyInput from "@/components/ui/money-input";
 import { Mustahik } from "@/types/Data";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function EdiDataForm({
   mustahikData,
 }: {
   mustahikData: Mustahik;
 }) {
-  const { form, router, handleEditData } = useEditDataForm({ mustahikData });
+  const { form, router, handleEditData, isPending } = useEditDataForm({
+    mustahikData,
+  });
   return (
     <Card className="p-8">
       <Form {...form}>
@@ -301,10 +304,11 @@ export default function EdiDataForm({
               Batal
             </Button>
             <Button
+              disabled={isPending}
               type="submit"
               className="px-6 py-2 bg-[#157145] hover:bg-[#157145]/70 text-white rounded-lg"
             >
-              Simpan
+              {isPending ? <Spinner variant="circle" color="white" /> : "Simpan"}
             </Button>
           </div>
         </form>

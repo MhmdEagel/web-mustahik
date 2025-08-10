@@ -7,4 +7,5 @@ export const loginSchema = z.object({
     error: (iss) =>
       iss.input === undefined ? "Password harus diisi." : "Password invalid.",
   }),
+  code: z.string().optional()
 });
