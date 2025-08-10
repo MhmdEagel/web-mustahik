@@ -32,18 +32,18 @@ export function DataTable<TData, TValue>({
   });
   return (
     <div  >
-      <div className="overflow-hidden rounded-xl border border-gray-700">
+      <div className="overflow-hidden rounded-xl border border-gray-400">
         <Table>
           <TableHeader className="bg-[#f4f4f4d1]">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
-                className="border-b border-gray-700 "
+                className="border-b border-gray-400 "
                 key={headerGroup.id}
               >
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
-                      className=" border-r border-gray-700 font-bold text-black text-center last:border-r-0"
+                      className=" border-r border-gray-400 font-bold text-black text-center last:border-r-0"
                       key={header.id}
                     >
                       {header.isPlaceholder
@@ -62,12 +62,12 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
-                className="border-b border-gray-700"
+                className="border-b border-gray-400"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell className="border-r  border-gray-700 text-black text-center last:border-r-0" key={cell.id}>
+                    <TableCell className="border-r  border-gray-400 text-black text-center last:border-r-0" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

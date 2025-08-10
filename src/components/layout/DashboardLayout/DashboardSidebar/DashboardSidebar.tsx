@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import { SidebarItems } from "@/types/Dashboard";
 import { User } from "lucide-react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -27,6 +28,7 @@ interface PropTypes {
 export default function DashboardSidebar(props: PropTypes) {
   const { sidebarItems } = props;
   const pathname = usePathname();
+  const url = `/${pathname.split("/").filter(Boolean).slice(0, 2).join("/")}`;
 
   return (
     <Sidebar>
@@ -59,15 +61,21 @@ export default function DashboardSidebar(props: PropTypes) {
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((item) => (
-                      <SidebarMenuSubItem className="cursor-pointer" key={item.key}>
-                        <SidebarMenuSubButton asChild>
+                      <SidebarMenuSubItem
+                        className="cursor-pointer"
+                        key={item.key}
+                      >
+                        <SidebarMenuSubButton
+                          isActive={url === item.href}
+                          asChild
+                        >
                           {item.href ? (
                             <Link href={`${item.href}`}>
-                              {item.icon}
+                              <span>{item.icon}</span>
                               {item.label}
                             </Link>
                           ) : (
-                            <div>
+                            <div onClick={() => signOut()}>
                               {item.icon}
                               {item.label}
                             </div>

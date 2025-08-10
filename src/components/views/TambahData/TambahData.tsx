@@ -26,7 +26,6 @@ import { Spinner } from "@/components/ui/spinner";
 
 export default function TambahData() {
   const { form, router, handleTambahData, isPending } = useTambahData();
-
   console.log(form.formState.errors);
 
   return (
