@@ -82,7 +82,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center font-bold text-black"
                 >
-                  Tabel Kosong.
+                  Data tidak ditemukan.
                 </TableCell>
               </TableRow>
             )}

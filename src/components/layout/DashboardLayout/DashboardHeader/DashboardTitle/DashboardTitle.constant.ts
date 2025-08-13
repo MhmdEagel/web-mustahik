@@ -4,6 +4,10 @@ export const DASHBOARD_TITLE = [
     title: "Data Mustahik",
   },
   {
+    path: "/dashboard/kalkulator-had",
+    title: "Kalkulator Had Kifayah",
+  },
+  {
     path: "/dashboard/tambah-data",
     title: "Tambah Data",
   },

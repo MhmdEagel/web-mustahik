@@ -51,3 +51,13 @@ export const createMetadata = ({
 }: MetaHeader): Metadata => ({
   title,
 });
+
+export function searchParamsToObject(params: Record<string, string | undefined>) {
+  const obj: Record<string, any> = {};
+  for (const key in params) {
+    if (params[key]) {
+      obj[key] = params[key];
+    }
+  }
+  return obj;
+}

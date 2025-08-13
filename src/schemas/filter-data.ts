@@ -1,26 +1,13 @@
 import z from "zod";
 
 export const filterSchema = z.object({
-  nik: z
-    .string()
-    .max(16, { message: "NIK maksimal 16 karakter" })
-    .regex(/^\d+$/, { message: "NIK hanya boleh angka" })
-    .optional(),
+  NIK: z.string().max(16, { message: "NIK maksimal 16 karakter" }).optional(),
   alamat: z.string().optional(),
+  jenis_bantuan: z.string().optional(),
 
-  jenisBantuan: z
-    .string()
-    .min(1, { message: "Jenis Bantuan harus dipilih" })
-    .optional(),
-
-  nama: z.string().min(3, { message: "Nama minimal 3 karakter" }).optional(),
-
-  noTelepon: z
-    .string()
-    .min(10, { message: "No. Telepon minimal 10 digit" })
-    .regex(/^\d+$/, { message: "No. Telepon hanya boleh angka" })
-    .optional(),
+  nama: z.string().optional(),
+  nomor_telepon: z.string().optional(),
   status: z.string().optional(),
   tanggal: z.date().optional(),
-  nama_penerima: z.string().optional()
+  nama_penerima_laporan: z.string().optional(),
 });

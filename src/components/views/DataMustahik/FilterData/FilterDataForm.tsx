@@ -12,26 +12,44 @@ import { useFilterData } from "./useFilterData";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CalendarIcon, Search } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-
+import DatePicker from "@/components/ui/date-picker";
 
 export default function FilterDataForm() {
-  const { form } = useFilterData();
+  const { form, handleFilterData, router } = useFilterData();
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit((data) => console.log(data))} className="flex flex-col lg:grid lg:grid-cols-2 gap-4">
+      <form
+        onSubmit={form.handleSubmit(handleFilterData)}
+        className="flex flex-col lg:grid lg:grid-cols-2 gap-4"
+      >
         <FormField
           control={form.control}
-          name="nik"
+          name="NIK"
           render={({ field }) => (
             <FormItem>
               <FormLabel>NIK</FormLabel>
               <FormControl>
-                <Input placeholder="NIK" {...field} value={field.value} autoComplete="off" />
+                <Input
+                  placeholder="NIK"
+                  {...field}
+                  value={field.value}
+                  autoComplete="off"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -44,7 +62,12 @@ export default function FilterDataForm() {
             <FormItem>
               <FormLabel>Alamat</FormLabel>
               <FormControl>
-                <Input placeholder="Alamat" {...field} value={field.value} autoComplete="off" />
+                <Input
+                  placeholder="Alamat"
+                  {...field}
+                  value={field.value}
+                  autoComplete="off"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -52,7 +75,7 @@ export default function FilterDataForm() {
         />
         <FormField
           control={form.control}
-          name="jenisBantuan"
+          name="jenis_bantuan"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Jenis Bantuan</FormLabel>
@@ -81,7 +104,12 @@ export default function FilterDataForm() {
             <FormItem>
               <FormLabel>Nama</FormLabel>
               <FormControl>
-                <Input placeholder="Nama" {...field} value={field.value} autoComplete="off" />
+                <Input
+                  placeholder="Nama"
+                  {...field}
+                  value={field.value}
+                  autoComplete="off"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -89,12 +117,17 @@ export default function FilterDataForm() {
         />
         <FormField
           control={form.control}
-          name="noTelepon"
+          name="nomor_telepon"
           render={({ field }) => (
             <FormItem>
               <FormLabel>No. Telepon</FormLabel>
               <FormControl>
-                <Input placeholder="No. Telepon" {...field} value={field.value} autoComplete="off" />
+                <Input
+                  placeholder="No. Telepon"
+                  {...field}
+                  value={field.value}
+                  autoComplete="off"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -113,8 +146,12 @@ export default function FilterDataForm() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="terverifikasi">Terverifikasi</SelectItem>
-                    <SelectItem value="belum_terverifikasi">Belum Terverifikasi</SelectItem>
-                    <SelectItem value="sudah_menerima">Sudah Menerima Bantuan</SelectItem>
+                    <SelectItem value="belum_terverifikasi">
+                      Belum Terverifikasi
+                    </SelectItem>
+                    <SelectItem value="sudah_menerima">
+                      Sudah Menerima Bantuan
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </FormControl>
@@ -122,60 +159,36 @@ export default function FilterDataForm() {
             </FormItem>
           )}
         />
+        <DatePicker form={form} />
         <FormField
-            control={form.control}
-            name="tanggal"
-            render={({ field }) => (
-              <FormItem className="flex flex-col items-start">
-                <FormLabel>Tanggal</FormLabel>
-                {/* popover */}
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-full justify-start text-left font-normal",
-                        !field.value && "text-muted-foreground"
-                      )}
-                    >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
-                      {field.value ? (
-                        format(field.value, "PPP HH:mm:ss")
-                      ) : (
-                        <span>Pilih Tanggal</span>
-                      )}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
           control={form.control}
-          name="nama_penerima"
+          name="nama_penerima_laporan"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Nama Penerima Laporan</FormLabel>
               <FormControl>
-                <Input placeholder="Nama Penerima Laporan" {...field} value={field.value} autoComplete="off" />
+                <Input
+                  placeholder="Nama Penerima Laporan"
+                  {...field}
+                  value={field.value}
+                  autoComplete="off"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="col-span-2 flex justify-end">
-          <Button type="submit" className="w-fit bg-foreground">
+        <div className="col-span-2 flex justify-end space-x-2 ">
+          <Button
+            onClick={() => router.replace("/dashboard")}
+            className="w-fit bg-red-600 hover:bg-red-600/80"
+          >
+            Hapus Filter
+          </Button>
+          <Button
+            type="submit"
+            className="w-fit bg-foreground hover:bg-foreground/80"
+          >
             <Search /> Filter
           </Button>
         </div>

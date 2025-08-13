@@ -1,4 +1,4 @@
-import { LogOut, Settings, Table } from "lucide-react";
+import { Calculator, LogOut, Settings, Table } from "lucide-react";
 
 const SIDEBAR_ITEMS = [
   {
@@ -6,12 +6,18 @@ const SIDEBAR_ITEMS = [
     items: [
       {
         key: "dashboard-item-1",
-        label: "Data",
+        label: "Kalkulator Had",
+        href: "/dashboard/kalkulator-had",
+        icon: <Calculator size={18} />,
+      },
+      {
+        key: "dashboard-item-2",
+        label: "Data Mustahik",
         href: "/dashboard",
         icon: <Table size={18} />,
       },
       {
-        key: "dashboard-item-2",
+        key: "dashboard-item-3",
         label: "Pengaturan",
         href: "/dashboard/pengaturan",
         icon: <Settings size={18} />,

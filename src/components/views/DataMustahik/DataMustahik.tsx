@@ -5,8 +5,14 @@ import Link from "next/link";
 import { Suspense } from "react";
 import DataMustahikTable from "./DataMustahikTable/DataMustahikTable";
 import { Skeleton } from "@/components/ui/skeleton";
+import { searchParamsToObject } from "@/lib/utils";
 
-export default function DataMustahik() {
+export default function DataMustahik({
+  searchParams,
+}: {
+  searchParams: Record<string, string | undefined>;
+}) {
+  const filters = searchParamsToObject(searchParams);
   return (
     <div className="space-y-4">
       <FilterData />
@@ -19,7 +25,7 @@ export default function DataMustahik() {
         <Suspense
           fallback={<Skeleton className="w-full h-[420px] rounded-xl mt-4" />}
         >
-          <DataMustahikTable />
+          <DataMustahikTable filters={filters} />
         </Suspense>
       </div>
     </div>

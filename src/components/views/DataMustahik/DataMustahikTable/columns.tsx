@@ -55,7 +55,7 @@ export const columns: ColumnDef<MustahikTable>[] = [
       return (
         <div
           className={cn(
-            "border rounded-lg border-foreground text-foreground px-3 py-1 capitalize",
+            "border rounded-lg border-foreground text-foreground p-1 capitalize",
             {
               "border-red-700 text-red-700":
                 statusData === "belum_terverifikasi",
@@ -73,7 +73,7 @@ export const columns: ColumnDef<MustahikTable>[] = [
     cell: ({ row }) => {
       const { id } = row.original;
       return (
-        <div className="space-x-2 flex">
+        <div className="space-x-2 flex justify-center">
           <DeleteBtn mustahikId={id} />
           <Link href={`/dashboard/edit-data/${id}`}>
             <Button

@@ -1,4 +1,4 @@
-import DetailData from '@/components/views/DetailData/DetailData'
+import DetailData from '@/components/views/DataMustahik/DetailData/DetailData'
 import { createMetadata } from '@/lib/utils';
 import React from 'react'
 

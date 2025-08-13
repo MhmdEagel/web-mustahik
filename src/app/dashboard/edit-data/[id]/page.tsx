@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/spinner";
-import EditData from "@/components/views/EditData/EditData";
+import EditData from "@/components/views/DataMustahik/EditData/EditData";
 import { createMetadata } from "@/lib/utils";
 import { Suspense } from "react";
 
