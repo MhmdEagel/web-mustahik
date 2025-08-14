@@ -1,5 +1,5 @@
 interface Filters {
-  nik?: string;
+  NIK?: string;
   alamat?: string;
   jenis_bantuan?: string;
   nama?: string;

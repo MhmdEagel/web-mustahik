@@ -21,11 +21,12 @@ export const useFilterData = () => {
   });
 
   const handleFilterData = (data: z.infer<typeof filterSchema>) => {
+    console.log(data)
     const query = new URLSearchParams();
     Object.entries(data).forEach(([key, value]) => {
       if (value) {
         if (value instanceof Date) {
-          query.set(key, value.toISOString()); // kirim format ISO
+          query.set(key, value.toISOString());
         } else {
           query.set(key, String(value));
         }

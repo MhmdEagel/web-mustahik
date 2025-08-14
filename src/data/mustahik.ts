@@ -5,7 +5,7 @@ export const getMustahikData = async (filters?: Filters) => {
   const res = await db.mustahik.findMany({
     where: filters
       ? {
-          NIK: { contains: filters.nik ?? undefined },
+          NIK: { contains: filters.NIK ?? undefined },
           alamat: { contains: filters.alamat ?? undefined },
           jenis_bantuan: { contains: filters.jenis_bantuan ?? undefined },
           nama: { contains: filters.nama ?? undefined },
