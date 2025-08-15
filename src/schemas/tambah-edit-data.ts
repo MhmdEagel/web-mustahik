@@ -91,6 +91,10 @@ export const tambahDataSchema = z.object({
         is.input === undefined ? "Status harus dipilih" : "Input invalid",
     })
     .min(1, { error: "Status wajib dipilih" }),
+  golongan: z.string({
+    error: (is) =>
+      is.input === undefined ? "Golongan harus dipilih" : "Input invalid",
+  }),
 });
 
 export const editDataSchema = z.object({
@@ -155,7 +159,6 @@ export const editDataSchema = z.object({
           : "Input invalid",
     })
     .min(1, { error: "Kelurahan wajib diisi" }),
-
   jenis_bantuan: z
     .string({
       error: (is) =>
@@ -185,4 +188,8 @@ export const editDataSchema = z.object({
         is.input === undefined ? "Status harus dipilih" : "Input invalid",
     })
     .min(1, { error: "Status wajib dipilih" }),
+  golongan: z.string({
+    error: (is) =>
+      is.input === undefined ? "Golongan harus dipilih" : "Input invalid",
+  }),
 });

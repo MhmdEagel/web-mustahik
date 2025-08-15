@@ -245,6 +245,43 @@ export default function TambahData() {
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="golongan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Golongan</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value || ""}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Pilih Golongan" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="prioritas_1">
+                        Prioritas 1
+                      </SelectItem>
+                      <SelectItem value="prioritas_2">
+                        Prioritas 2
+                      </SelectItem>
+                      <SelectItem value="prioritas_3">
+                        Prioritas 3
+                      </SelectItem>
+                      <SelectItem value="prioritas_4">
+                        Prioritas 4
+                      </SelectItem>
+                      <SelectItem value="prioritas_5">
+                        Prioritas 5
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <div className="flex justify-end col-span-2 space-x-4">
             <Button
               type="button"

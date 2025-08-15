@@ -15,7 +15,7 @@ export function generateAlamatString(
   kelurahan: string,
   namaJalan: string
 ) {
-  return `${namaJalan}, Kel. ${kelurahan}, Kec. ${kecamatan}, ${kotaKabupaten}`;
+  return `${namaJalan}, Kec. ${kelurahan}, Kel. ${kecamatan}, ${kotaKabupaten}`;
 }
 
 export const moneyFormatter = Intl.NumberFormat("id-ID", {
@@ -33,8 +33,8 @@ export function generateDateString(date: Date) {
 export function getAlamatObj(alamat: string) {
   const alamatList = alamat.split(",");
   const result = alamatList.map((item, index) => {
-    if (index === 1) return item.trim().replace("Kel. ", "");
-    if (index === 2) return item.trim().replace("Kec. ", "");
+    if (index === 1) return item.trim().replace("Kec. ", "");
+    if (index === 2) return item.trim().replace("Kel. ", "");
     return item.trim();
   });
   return result;

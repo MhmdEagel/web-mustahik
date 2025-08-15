@@ -36,7 +36,7 @@ async function DetailDataCard({ mustahikId }: { mustahikId: string }) {
         <Image
           src={"/ilustration/not-found.svg"}
           width={300}
-          height={300}
+          height={300}  
           alt="404 not found"
         />
         <div className="text-foreground text-2xl font-bold mb-2">
@@ -57,6 +57,10 @@ async function DetailDataCard({ mustahikId }: { mustahikId: string }) {
         const label = key.split("_").join(" ");
 
         if (key === "id") return null;
+        if (key === "status") {
+          const status_value = (value as string).split('_').join(" ")
+          return <DetailDataItem key={key} label={label} value={status_value} />;
+        }
         if (value instanceof Date) {
           const dateString = generateDateString(value);
           return <DetailDataItem key={key} label={label} value={dateString} />;

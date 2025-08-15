@@ -9,5 +9,6 @@ interface Mustahik {
     tanggal: Date;
     nama_penerima_laporan: string;
     status: string;
+    golongan: string;
 }
 export type {Mustahik}

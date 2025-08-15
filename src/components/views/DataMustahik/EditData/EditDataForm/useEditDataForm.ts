@@ -19,6 +19,7 @@ export const useEditDataForm = ({
   const [isPending, setIsPending] = useState(false);
 
   const { alamat } = mustahikData;
+  console.log(alamat)
   const formattedAlamat = getAlamatObj(alamat);
 
   const form = useForm({
@@ -36,6 +37,7 @@ export const useEditDataForm = ({
       tanggal: mustahikData.tanggal,
       nama_penerima_laporan: mustahikData.nama_penerima_laporan,
       status: mustahikData.status,
+      golongan: mustahikData.golongan
     },
     resolver: zodResolver(editDataSchema),
   });
@@ -57,6 +59,7 @@ export const useEditDataForm = ({
         tanggal,
         nomor_telepon,
         nama_penerima_laporan,
+        golongan
       } = data;
 
       const alamatString = generateAlamatString(
@@ -76,6 +79,7 @@ export const useEditDataForm = ({
         tanggal,
         nomor_telepon,
         nama_penerima_laporan,
+        golongan
       };
 
       const res = await editData(id, newMustahikObj);

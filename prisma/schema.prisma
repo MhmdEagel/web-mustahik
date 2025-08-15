@@ -32,6 +32,7 @@ model Mustahik {
   tanggal               DateTime
   nama_penerima_laporan String
   status                String
+  golongan              String
 }
 
 model TwoFactorToken {

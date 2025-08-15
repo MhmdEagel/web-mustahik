@@ -4,108 +4,60 @@ export const kalkulatorSchema = z.object({
   // Data Mustahik
   nama_mustahik: z.string({
     error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      iss.input === undefined ? "Nama mustahik wajib diisi" : "Input Invalid",
   }),
   kecamatan: z.string({
     error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      iss.input === undefined ? " Kecamatan wajib diisi" : "Input Invalid",
   }),
   kelurahan: z.string({
     error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      iss.input === undefined ? "Kelurahan wajib diisi" : "Input Invalid",
   }),
   kota_kabupaten: z.string({
     error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      iss.input === undefined ? "Kota/Kabupaten wajib diisi" : "Input Invalid",
   }),
   nama_jalan: z.string({
     error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      iss.input === undefined ? "Nama jalan wajib diisi" : "Input Invalid",
   }),
 
   // Sumber Pendapatan
   pendapatan_kepala_keluarga: z.coerce
     .number({
       error: (iss) =>
-        iss.input === undefined ? " wajib diisi" : "Input Invalid",
+        iss.input === undefined ? "Pendapatan keluarga wajib diisi" : "Input Invalid",
     })
     .positive("Nilai harus positif"),
   pendapatan_anggota_lain_per_bulan: z.coerce
-    .number({
-      error: (iss) =>
-        iss.input === undefined ? " wajib diisi" : "Input Invalid",
-    })
-    .positive("Nilai harus positif"),
+    .number()
+    .positive("Nilai harus positif").optional(),
 
   // Pengeluaran Keluarga Per Bulan
-  kepala_rumah_tangga: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  ibu_rumah_tangga: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  anak_dewasa_bekerja: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  anak_dewasa_tidak_bekerja: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  anak_sekolah_sma: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  anak_sekolah_smp: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  anak_sekolah_sd: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  anak_bayi_belum_sekolah: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  biaya_perguruan_tinggi: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  beban_keuangan: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
+  kepala_rumah_tangga: z.coerce.number().optional(),
+  ibu_rumah_tangga: z.coerce.number().optional(),
+  anak_dewasa_bekerja: z.coerce.number().optional(),
+  anak_dewasa_tidak_bekerja: z.coerce.number().optional(),
+  anak_sekolah_sma: z.coerce.number().optional(),
+  anak_sekolah_smp: z.coerce.number().optional(),
+  anak_sekolah_sd: z.coerce.number().optional(),
+  anak_bayi_belum_sekolah: z.coerce.number().optional(),
+  biaya_perguruan_tinggi: z.coerce.number().optional(),
 
   // Pengeluaran Tambahan Per Bulan
-  penyandang_disabilitas: z.coerce.number({
+  penyandang_disabilitas: z.coerce.number().optional(),
+  ibu_menyusui: z.coerce.number().optional(),
+  ibu_hamil: z.coerce.number().optional(),
+  status_janda_bekerja: z.coerce.number().optional(),
+  status_janda_tidak_bekerja: z.coerce.number().optional(),
+  
+   // Status Tempat Tinggal
+  memiliki_rumah_kontrak: z.string({
     error: (iss) =>
       iss.input === undefined ? " wajib diisi" : "Input Invalid",
   }),
-  ibu_menyusui: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  ibu_hamil: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  status_janda_tidak_bekerja: z.coerce.number({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-
-  // Kepemilikan Asset
-  memiliki_kendaraan_bermotor: z.string({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
-  memiliki_tabungan: z.string({
-    error: (iss) =>
-      iss.input === undefined ? " wajib diisi" : "Input Invalid",
-  }),
+  penerangan_listrik: z.string().optional(),
 
   // Menerima Bantuan Pemerintah
   bansos: z.string({
@@ -116,13 +68,18 @@ export const kalkulatorSchema = z.object({
     error: (iss) =>
       iss.input === undefined ? " wajib diisi" : "Input Invalid",
   }),
-
-  // Status Tempat Tinggal
-  memiliki_rumah_kontrak: z.string({
+  
+  // Kepemilikan Asset
+  memiliki_kendaraan_bermotor: z.string({
     error: (iss) =>
       iss.input === undefined ? " wajib diisi" : "Input Invalid",
   }),
-  penerangan_listrik: z.string({
+  memiliki_tabungan: z.string({
+    error: (iss) =>
+      iss.input === undefined ? " wajib diisi" : "Input Invalid",
+  }),
+ // Beban Keuangan
+  beban_keuangan: z.string({
     error: (iss) =>
       iss.input === undefined ? " wajib diisi" : "Input Invalid",
   }),
