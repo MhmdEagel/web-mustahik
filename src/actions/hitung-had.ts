@@ -27,11 +27,12 @@ export const hitungHadKifayah = async (
     ibu_hamil = 0,
     status_janda_bekerja = 0,
     status_janda_tidak_bekerja = 0,
-    penerangan_listrik,
+    penerangan_listrik = "",
     biaya_sewa_per_bulan = 0,
     jumlah_bantuan_bansos = 0,
     jumlah_iuran_bpjs = 0,
     jumlah_hutang = 0,
+    jumlah_biaya_kesehatan = 0
   } = data;
 
   const sumPendapatanKeluarga =
@@ -55,9 +56,10 @@ export const hitungHadKifayah = async (
     status_janda_bekerja +
     status_janda_tidak_bekerja +
     biaya_sewa_per_bulan +
-    getBiayaListrik(penerangan_listrik!) +
+    getBiayaListrik(penerangan_listrik) +
     jumlah_iuran_bpjs +
-    jumlah_hutang;
+    jumlah_hutang +
+    jumlah_biaya_kesehatan;
 
     const sisaHadKifayah = sumPendapatanKeluarga - sumPengeluaranKeluarga;
     return {sumPendapatanKeluarga, sumPengeluaranKeluarga, sisaHadKifayah}

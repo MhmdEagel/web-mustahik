@@ -66,8 +66,10 @@ export function getBiayaListrik(dayaListrik: string) {
     return 150000;
   } else if (dayaListrik === "900_watt") {
     return 300000;
-  } else {
+  } else if (dayaListrik === "lebih_dari_900_watt") {
     return 600000;
+  } else {
+    return 0;
   }
 }
 

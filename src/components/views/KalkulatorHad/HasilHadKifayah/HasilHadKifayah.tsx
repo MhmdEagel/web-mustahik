@@ -12,6 +12,7 @@ import {
   getPrioritasString,
   moneyFormatter,
 } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction } from "react";
@@ -35,12 +36,16 @@ export default function HasilHadKifayah({
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const prioritas = getPrioritasBantuan(pendapatan);
+  const router = useRouter()
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Hasil Hitung Had Kifayah</AlertDialogTitle>
+          <div className="mx-auto">
+            <Image width={150} height={150} src={"/icons/kalkulator-had.svg"} alt="Kalkulator Icon" />
+          </div>
+          <AlertDialogTitle className="text-center">Hasil Hitung Had Kifayah</AlertDialogTitle>
         </AlertDialogHeader>
         <div className="text-black">
           <p>
@@ -73,7 +78,7 @@ export default function HasilHadKifayah({
           )}
         </div>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => form.reset()}>Batal</AlertDialogCancel>
+          <AlertDialogCancel onClick={() => router.refresh()}>Batal</AlertDialogCancel>
           {pendapatan < pengeluaran ? (
             <AlertDialogAction>
               <Link href={`/dashboard/tambah-data?${routeParams}`}>
