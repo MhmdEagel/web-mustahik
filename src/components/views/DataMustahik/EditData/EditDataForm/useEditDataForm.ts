@@ -21,6 +21,7 @@ export const useEditDataForm = ({
   const { alamat } = mustahikData;
   console.log(alamat)
   const formattedAlamat = getAlamatObj(alamat);
+  console.log(formattedAlamat)
 
   const form = useForm({
     defaultValues: {
@@ -29,8 +30,8 @@ export const useEditDataForm = ({
       nama: mustahikData.nama,
       nomor_telepon: mustahikData.nomor_telepon,
       kota: formattedAlamat[3],
-      kecamatan: formattedAlamat[2],
-      kelurahan: formattedAlamat[1],
+      kecamatan: formattedAlamat[1],
+      kelurahan: formattedAlamat[2],
       nama_jalan: formattedAlamat[0],
       jenis_bantuan: mustahikData.jenis_bantuan,
       jumlah_bantuan: mustahikData.jumlah_bantuan,

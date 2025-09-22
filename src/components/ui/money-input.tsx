@@ -41,7 +41,6 @@ export default function MoneyInput(props: TextInputProps) {
       render={({ field }) => {
         field.value = value;
         const _change = field.onChange;
-
         return (
           <FormItem>
             <FormLabel>{props.label}</FormLabel>

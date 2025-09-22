@@ -11,7 +11,7 @@ export default function DetailDataItem(props: PropTypes) {
   return (
     <div className="grid grid-cols-1 gap-2">
       <Label className="capitalize">{label}</Label>
-      <div className="flex w-full border px-3 py-1 rounded-lg">{value}</div>
+      <div className="flex w-full border px-3 py-1 rounded-lg capitalize">{value}</div>
     </div>
   );
 }
