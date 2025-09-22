@@ -28,8 +28,7 @@ export const useTambahData = () => {
   const router = useRouter();
   const [isPending, setIsPending] = useState(false);
   const [isPendingUpload, setIsPendingUpload] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+
 
   const searchParams = useSearchParams();
   const namaParams = searchParams.get("nama");
