@@ -35,7 +35,7 @@ export default function HasilHadKifayah({
   routeParams: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  const prioritas = getPrioritasBantuan(pendapatan);
+  const prioritas = getPrioritasBantuan(hadKifayah);
   const router = useRouter()
 
   return (
@@ -66,7 +66,7 @@ export default function HasilHadKifayah({
               {moneyFormatter.format(hadKifayah)}
             </span>
           </p>
-          {pendapatan < pengeluaran && prioritas ? (
+          {prioritas ? (
             <p className="text-center mt-4">
               Termasuk Mustahik / Penerima Bantuan{" "}
               {getPrioritasString(prioritas!)}

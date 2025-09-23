@@ -73,27 +73,30 @@ export function getBiayaListrik(dayaListrik: string) {
   }
 }
 
-export function getPrioritasBantuan(pendapatan: number) {
-  if (pendapatan <= 1_500_000) {
-    return "prioritas_1";
-  } else if (pendapatan <= 2_200_000) {
-    return "prioritas_2";
-  } else if (pendapatan <= 2_800_000) {
-    return "prioritas_3";
-  } else if (pendapatan <= 3_400_000) {
-    return "prioritas_4";
-  } else if (pendapatan <= 5_000_000) {
+export function getPrioritasBantuan(selisih: number) {
+  if (selisih <= 500_000 && selisih >= -1_500_000) {
     return "prioritas_5";
-  } else {
-    return null
   }
+  if (selisih <= -1_500_001 && selisih >= -2_200_000) {
+    return "prioritas_4";
+  }
+  if (selisih <= -2_200_001 && selisih >= -2_800_000) {
+    return "prioritas_3";
+  }
+  if (selisih <= -2_800_001 && selisih >= -3_400_000) {
+    return "prioritas_2";
+  }
+  if (selisih <= -3_400_001) {
+    return "prioritas_1";
+  }
+  return null;
 }
 
 export function getPrioritasString(prioritas_value: string) {
   if (prioritas_value && prioritas_value !== "" && prioritas_value !== null) {
-    return prioritas_value.split("_").join(" ")
+    return prioritas_value.split("_").join(" ");
   }
-  return ""
+  return null;
 }
 
 export async function excelToJSON(file?: File) {
