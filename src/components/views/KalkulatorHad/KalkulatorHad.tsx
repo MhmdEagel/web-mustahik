@@ -58,7 +58,7 @@ export default function KalkulatorHad() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleKalkulatorHad)}>
-              <div className="space-y-2">
+              <div className="space-y-6">
                 <Card>
                   <CardHeader>
                     <div className="text-lg font-bold">Data Mustahik</div>

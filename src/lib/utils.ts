@@ -85,13 +85,15 @@ export function getPrioritasBantuan(pendapatan: number) {
   } else if (pendapatan <= 5_000_000) {
     return "prioritas_5";
   } else {
-    return null;
+    return null
   }
 }
 
 export function getPrioritasString(prioritas_value: string) {
-  const result = prioritas_value.split("_").join(" ");
-  return result;
+  if (prioritas_value && prioritas_value !== "" && prioritas_value !== null) {
+    return prioritas_value.split("_").join(" ")
+  }
+  return ""
 }
 
 export async function excelToJSON(file?: File) {

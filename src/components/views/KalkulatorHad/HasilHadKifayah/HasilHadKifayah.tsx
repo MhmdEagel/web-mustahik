@@ -66,7 +66,7 @@ export default function HasilHadKifayah({
               {moneyFormatter.format(hadKifayah)}
             </span>
           </p>
-          {pendapatan < pengeluaran ? (
+          {pendapatan < pengeluaran && prioritas ? (
             <p className="text-center mt-4">
               Termasuk Mustahik / Penerima Bantuan{" "}
               {getPrioritasString(prioritas!)}
