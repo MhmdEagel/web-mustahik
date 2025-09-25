@@ -11,6 +11,7 @@ import z from "zod";
 import * as XLSX from "xlsx";
 import { db } from "@/lib/db";
 import { tambahDataExcel } from "@/actions/tambah-data-excel";
+import { IsOwned } from "@prisma/client";
 
 type routeParams = {
   nama: string;
@@ -29,7 +30,6 @@ export const useTambahData = () => {
   const [isPending, setIsPending] = useState(false);
   const [isPendingUpload, setIsPendingUpload] = useState(false);
 
-
   const searchParams = useSearchParams();
   const namaParams = searchParams.get("nama");
   const nama_jalanParams = searchParams.get("nama_jalan");
@@ -37,6 +37,18 @@ export const useTambahData = () => {
   const kecamatanParams = searchParams.get("kecamatan");
   const kotaParams = searchParams.get("kota");
   const golonganParams = searchParams.get("golongan");
+
+  const memilikiTanahParams = searchParams.get(
+    "memiliki_tanah_sawah_warung_bengkel"
+  );
+  const memilikiPerhiasanParams = searchParams.get("memiliki_perhiasan");
+  const memilikiKulkasParams = searchParams.get("memiliki_kulkas_tv_lcd");
+  const memilikiTabungParams = searchParams.get("memiliki_tabung_gas_3kg");
+  const memilikiHpParams = searchParams.get("memiliki_hp_laptop");
+  const memilikiKendaraanParams = searchParams.get(
+    "memiliki_kendaraan_bermotor"
+  );
+  const memilikiTabunganParams = searchParams.get("memiliki_tabungan");
 
   const [activeTab, setActiveTab] = useState<"form_tambah" | "upload_excel">(
     "form_tambah"
@@ -77,7 +89,7 @@ export const useTambahData = () => {
       if (res.success && !res.error) {
         toast.success(res.success);
         setIsPendingUpload(false);
-        router.replace("/dashboard")
+        router.replace("/dashboard");
         return;
       }
       toast.error(res.error);
@@ -96,6 +108,13 @@ export const useTambahData = () => {
       tanggal: new Date(),
       jumlah_bantuan: 0,
       golongan: golonganParams ?? "",
+      memiliki_tanah_sawah_warung_bengkel: memilikiTanahParams ?? "",
+      memiliki_perhiasan: memilikiPerhiasanParams ?? "",
+      memiliki_kulkas_tv_lcd: memilikiKulkasParams ?? "",
+      memiliki_tabung_gas_3kg: memilikiTabungParams ?? "",
+      memiliki_hp_laptop: memilikiHpParams ?? "",
+      memiliki_kendaraan_bermotor: memilikiKendaraanParams ?? "",
+      memiliki_tabungan: memilikiTabunganParams ?? "",
     },
     resolver: zodResolver(tambahDataSchema),
   });
@@ -117,6 +136,13 @@ export const useTambahData = () => {
         nomor_telepon,
         nama_penerima_laporan,
         golongan,
+        memiliki_tanah_sawah_warung_bengkel,
+        memiliki_perhiasan,
+        memiliki_kulkas_tv_lcd,
+        memiliki_tabung_gas_3kg,
+        memiliki_hp_laptop,
+        memiliki_kendaraan_bermotor,
+        memiliki_tabungan,
       } = data;
 
       const alamatString = generateAlamatString(
@@ -137,6 +163,14 @@ export const useTambahData = () => {
         nomor_telepon,
         nama_penerima_laporan,
         golongan,
+        memiliki_tanah_sawah_warung_bengkel:
+          memiliki_tanah_sawah_warung_bengkel as IsOwned,
+        memiliki_perhiasan: memiliki_perhiasan as IsOwned,
+        memiliki_kulkas_tv_lcd: memiliki_kulkas_tv_lcd as IsOwned,
+        memiliki_tabung_gas_3kg: memiliki_tabung_gas_3kg as IsOwned,
+        memiliki_hp_laptop: memiliki_hp_laptop as IsOwned,
+        memiliki_kendaraan_bermotor: memiliki_kendaraan_bermotor as IsOwned,
+        memiliki_tabungan: memiliki_tabungan as IsOwned,
       };
 
       // console.log(newMustahikObj)

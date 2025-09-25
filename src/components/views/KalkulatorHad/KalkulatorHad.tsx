@@ -468,71 +468,7 @@ export default function KalkulatorHad() {
                     </div>
                   </CardContent>
                 </Card>
-                <Card>
-                  <CardHeader>
-                    <div className="text-lg font-bold">Kepemilikan Aset</div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-col lg:grid  lg:grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="memiliki_kendaraan_bermotor"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Memiliki Kendaraan Bermotor</FormLabel>
-                            <FormControl>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value || ""}
-                              >
-                                <SelectTrigger className="w-full">
-                                  <SelectValue placeholder="Pilih Opsi" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="memiliki_kendaraan_bermotor">
-                                    Memiliki Kendaraan Bermotor
-                                  </SelectItem>
-                                  <SelectItem value="tidak_memiliki_kendaraan_bermotor">
-                                    Tidak Memiliki Kendaraan Bermotor
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="memiliki_tabungan"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Memiliki Tabungan</FormLabel>
-                            <FormControl>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value || ""}
-                              >
-                                <SelectTrigger className="w-full">
-                                  <SelectValue placeholder="Pilih Opsi" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="memiliki_tabungan">
-                                    Memiliki Tabungan
-                                  </SelectItem>
-                                  <SelectItem value="tidak_memiliki_tabungan">
-                                    Tidak Memiliki Tabungan
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
+                
                 <Card>
                   <CardHeader>
                     <div className="text-lg font-bold">Beban Keuangan</div>
@@ -575,6 +511,194 @@ export default function KalkulatorHad() {
                           placeholder="Jumlah Hutang Per Bulan"
                         />
                       ) : null}
+                    </div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardHeader>
+                    <div className="text-lg font-bold">Kepemilikan Aset</div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col lg:grid  lg:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="memiliki_tanah_sawah_warung_bengkel"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-xs">
+                              Memiliki tanah dan/atau sawah dan/atau warung
+                              dan/atau bengkel
+                            </FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="memiliki_perhiasan"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Memiliki perhiasan</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="memiliki_kulkas_tv_lcd"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              Memiliki kulkas dan/atau tv dan/atau lcd
+                            </FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="memiliki_tabung_gas_3kg"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Memiliki tabung gas 3kg</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="memiliki_hp_laptop"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>
+                              Memiliki Handphone dan/atau laptop
+                            </FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="memiliki_tabungan"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Memiliki Tabungan</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="memiliki_kendaraan_bermotor"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Memiliki kendaraan bermotor</FormLabel>
+                            <FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value || ""}
+                              >
+                                <SelectTrigger className="w-full">
+                                  <SelectValue placeholder="Pilih Opsi" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="YA">Ya</SelectItem>
+                                  <SelectItem value="TIDAK">Tidak</SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
                   </CardContent>
                 </Card>

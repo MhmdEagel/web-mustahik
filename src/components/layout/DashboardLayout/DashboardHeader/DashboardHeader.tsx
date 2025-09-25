@@ -13,6 +13,9 @@ export default function DashboardHeader() {
           className="mr-2 data-[orientation=vertical]:h-4 bg-white"
         />
         <DashboardTitle  />
+        <div className="italic text-white font-bold ml-auto">
+          IZI Riau
+        </div>
       </div>
     </header>
   );

@@ -37,22 +37,41 @@ export const useKalkulatorHad = () => {
     data: z.infer<typeof kalkulatorSchema>
   ) => {
     const res = await hitungHadKifayah(data);
-    const { nama_mustahik, kelurahan, kecamatan, kota_kabupaten, nama_jalan } =
-      data;
+    const {
+      nama_mustahik,
+      kelurahan,
+      kecamatan,
+      kota_kabupaten,
+      nama_jalan,
+      memiliki_tanah_sawah_warung_bengkel,
+      memiliki_perhiasan,
+      memiliki_kulkas_tv_lcd,
+      memiliki_tabung_gas_3kg,
+      memiliki_hp_laptop,
+      memiliki_kendaraan_bermotor,
+      memiliki_tabungan,
+    } = data;
     setHadKifayah({
       pendapatan: res.sumPendapatanKeluarga,
       pengeluaran: res.sumPengeluaranKeluarga,
       hadKifayah: res.sisaHadKifayah,
     });
 
-    const golongan = getPrioritasBantuan(res.sumPendapatanKeluarga)
+    const golongan = getPrioritasBantuan(res.sisaHadKifayah);
     const params = new URLSearchParams({
       nama: nama_mustahik,
       nama_jalan,
       kelurahan,
       kecamatan,
       kota: kota_kabupaten,
-      golongan: golongan!
+      golongan: golongan!,
+      memiliki_tanah_sawah_warung_bengkel,
+      memiliki_perhiasan,
+      memiliki_kulkas_tv_lcd,
+      memiliki_tabung_gas_3kg,
+      memiliki_hp_laptop,
+      memiliki_kendaraan_bermotor,
+      memiliki_tabungan,
     });
 
     setRouteParams(params.toString());
@@ -73,6 +92,6 @@ export const useKalkulatorHad = () => {
     open,
     setOpen,
     hadKifayah,
-    routeParams
+    routeParams,
   };
 };

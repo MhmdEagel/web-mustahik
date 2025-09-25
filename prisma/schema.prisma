@@ -9,7 +9,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -22,17 +22,24 @@ model User {
 }
 
 model Mustahik {
-  id                    String   @id @default(cuid())
-  NIK                   String
-  nama                  String
-  nomor_telepon         String
-  alamat                String
-  jenis_bantuan         String
-  jumlah_bantuan        Int
-  tanggal               DateTime
-  nama_penerima_laporan String
-  status                String
-  golongan              String
+  id                                  String   @id @default(cuid())
+  NIK                                 String
+  nama                                String
+  nomor_telepon                       String
+  alamat                              String
+  jenis_bantuan                       String
+  jumlah_bantuan                      Int
+  tanggal                             DateTime
+  nama_penerima_laporan               String
+  status                              String
+  golongan                            String
+  memiliki_tanah_sawah_warung_bengkel IsOwned
+  memiliki_perhiasan                  IsOwned
+  memiliki_kulkas_tv_lcd              IsOwned
+  memiliki_tabung_gas_3kg             IsOwned
+  memiliki_hp_laptop                  IsOwned
+  memiliki_kendaraan_bermotor         IsOwned
+  memiliki_tabungan                   IsOwned
 }
 
 model TwoFactorToken {
@@ -40,11 +47,17 @@ model TwoFactorToken {
   email   String
   token   String   @unique
   expires DateTime
+
   @@unique([email, token])
 }
 
 model TwoFactorConfirmation {
-  id String @id @default(cuid())
+  id     String @id @default(cuid())
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum IsOwned {
+  YA
+  TIDAK
 }

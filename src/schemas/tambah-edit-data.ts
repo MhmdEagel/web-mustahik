@@ -95,6 +95,35 @@ export const tambahDataSchema = z.object({
     error: (is) =>
       is.input === undefined ? "Golongan harus dipilih" : "Input invalid",
   }),
+  // Kepemilikan Asset
+      memiliki_tanah_sawah_warung_bengkel: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_perhiasan : z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_kulkas_tv_lcd : z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_tabung_gas_3kg: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_hp_laptop: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_kendaraan_bermotor: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_tabungan: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
 });
 
 export const editDataSchema = z.object({
@@ -181,7 +210,6 @@ export const editDataSchema = z.object({
           : "Input invalid",
     })
     .min(3, { error: "Nama penerima laporan minimal 3 karakter" }),
-
   status: z
     .string({
       error: (is) =>
@@ -192,4 +220,35 @@ export const editDataSchema = z.object({
     error: (is) =>
       is.input === undefined ? "Golongan harus dipilih" : "Input invalid",
   }),
+
+
+  // Kepemilikan Asset
+      memiliki_tanah_sawah_warung_bengkel: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_perhiasan : z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_kulkas_tv_lcd : z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_tabung_gas_3kg: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_hp_laptop: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_kendaraan_bermotor: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
+      memiliki_tabungan: z.string({
+        error: (iss) =>
+          iss.input === undefined ? " wajib diisi" : "Input Invalid",
+      }),
 });

@@ -15,7 +15,7 @@ export function generateAlamatString(
   kelurahan: string,
   namaJalan: string
 ) {
-  return `${namaJalan}, Kec. ${kelurahan}, Kel. ${kecamatan}, ${kotaKabupaten}`;
+  return `${namaJalan}, Kel. ${kelurahan}, Kec. ${kecamatan}, ${kotaKabupaten}`;
 }
 
 export const moneyFormatter = Intl.NumberFormat("id-ID", {

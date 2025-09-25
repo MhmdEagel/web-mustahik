@@ -96,6 +96,26 @@ export const kalkulatorSchema = z
     jumlah_biaya_kesehatan: z.coerce.number().optional(),
 
     // Kepemilikan Asset
+    memiliki_tanah_sawah_warung_bengkel: z.string({
+      error: (iss) =>
+        iss.input === undefined ? " wajib diisi" : "Input Invalid",
+    }),
+    memiliki_perhiasan : z.string({
+      error: (iss) =>
+        iss.input === undefined ? " wajib diisi" : "Input Invalid",
+    }),
+    memiliki_kulkas_tv_lcd : z.string({
+      error: (iss) =>
+        iss.input === undefined ? " wajib diisi" : "Input Invalid",
+    }),
+    memiliki_tabung_gas_3kg: z.string({
+      error: (iss) =>
+        iss.input === undefined ? " wajib diisi" : "Input Invalid",
+    }),
+    memiliki_hp_laptop: z.string({
+      error: (iss) =>
+        iss.input === undefined ? " wajib diisi" : "Input Invalid",
+    }),
     memiliki_kendaraan_bermotor: z.string({
       error: (iss) =>
         iss.input === undefined ? " wajib diisi" : "Input Invalid",

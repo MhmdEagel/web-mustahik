@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -29,6 +29,7 @@ import {
   DropzoneEmptyState,
 } from "@/components/ui/shadcn-io/dropzone";
 import { UploadIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function TambahData() {
   const {
@@ -46,18 +47,24 @@ export default function TambahData() {
     <Card className="p-8">
       <div className="flex">
         <Button
-          className="rounded-r-none"
+          className={cn("rounded-r-none border", {
+            "bg-foreground hover:bg-foreground/90 text-white":
+              activeTab === "form_tambah",
+          })}
           onClick={() => setActiveTab("form_tambah")}
-          variant={activeTab === "form_tambah" ? "default" : "outline"}
           type="button"
+          variant={"ghost"}
         >
           Form
         </Button>
         <Button
-          className="rounded-l-none"
+          className={cn("rounded-l-none border", {
+            "bg-foreground hover:bg-foreground/90 text-white":
+              activeTab === "upload_excel",
+          })}
           onClick={() => setActiveTab("upload_excel")}
-          variant={activeTab === "upload_excel" ? "default" : "outline"}
           type="button"
+          variant={"ghost"}
         >
           Upload{" "}
         </Button>
@@ -78,7 +85,6 @@ export default function TambahData() {
             onDrop={handleDrop}
             onError={console.error}
             src={files}
-            
           >
             <DropzoneEmptyState>
               <div className="flex flex-col items-center justify-center">
@@ -94,9 +100,13 @@ export default function TambahData() {
               </div>
             </DropzoneEmptyState>
             <DropzoneContent>
-              {isPendingUpload ? <Spinner /> : <p className="w-full text-wrap text-muted-foreground text-xs"> 
-                Redirecting....
-              </p>}
+              {isPendingUpload ? (
+                <Spinner />
+              ) : (
+                <p className="w-full text-wrap text-muted-foreground text-xs">
+                  Redirecting....
+                </p>
+              )}
             </DropzoneContent>
           </Dropzone>{" "}
         </>
@@ -347,6 +357,196 @@ export default function TambahData() {
                 </FormItem>
               )}
             />
+            <Card className="col-span-2">
+              <CardHeader>
+                <div className="font-bold">Kepemilikan Asset</div>
+              </CardHeader>
+              <CardContent>
+                <div className="gap-4 grid lg:grid-cols-2">
+                  <FormField
+                    control={form.control}
+                    name="memiliki_tanah_sawah_warung_bengkel"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-xs">
+                          Memiliki tanah dan/atau sawah dan/atau warung dan/atau
+                          bengkel
+                        </FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="memiliki_perhiasan"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Memiliki perhiasan</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="memiliki_kulkas_tv_lcd"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Memiliki kulkas dan/atau tv dan/atau lcd
+                        </FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="memiliki_tabung_gas_3kg"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Memiliki tabung gas 3kg</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="memiliki_hp_laptop"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Memiliki Handphone dan/atau laptop
+                        </FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="memiliki_tabungan"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Memiliki Tabungan</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="memiliki_kendaraan_bermotor"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Memiliki kendaraan bermotor</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value || ""}
+                          >
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Pilih Opsi" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="YA">Ya</SelectItem>
+                              <SelectItem value="TIDAK">Tidak</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
             <div className="flex justify-end col-span-2 space-x-4">
               <Button
                 type="button"
