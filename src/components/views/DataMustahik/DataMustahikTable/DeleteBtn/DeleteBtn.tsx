@@ -24,10 +24,10 @@ export default function DeleteBtn({ mustahikId }: { mustahikId?: string }) {
       <input type="hidden" name="id" value={mustahikId} />
       <Button
         type="submit"
-        className="bg-red-600 hover:bg-red-600/70"
-        size={"icon"}
+        variant={"ghost"}
       >
         <Trash />
+        Hapus
       </Button>
     </form>
   );

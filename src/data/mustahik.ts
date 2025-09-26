@@ -10,7 +10,7 @@ export const getMustahikData = async (filters?: Filters) => {
           jenis_bantuan: { contains: filters.jenis_bantuan ?? undefined },
           nama: { contains: filters.nama ?? undefined },
           nomor_telepon: { contains: filters.nomor_telepon ?? undefined },
-          tanggal: filters.tanggal ?? undefined ,
+          tanggal: filters.tanggal ?? undefined,
           status: { contains: filters.status ?? undefined },
           nama_penerima_laporan: {
             contains: filters.nama_penerima_laporan ?? undefined,
@@ -23,7 +23,6 @@ export const getMustahikData = async (filters?: Filters) => {
       jenis_bantuan: true,
     },
   });
-
   return res;
 };
 
@@ -41,3 +40,4 @@ export const getMustahikDataById = async (
   });
   return res;
 };
+

@@ -6,6 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getPaginationRowModel,
+  Table as TableType,
 } from "@tanstack/react-table";
 
 import {
@@ -27,6 +28,25 @@ import {
 
 import { Button } from "./button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { isNotEmptyObject } from "@/lib/utils";
+import { Checkbox } from "./checkbox";
+import { Mustahik } from "@/types/Data";
+import { Toggle } from "./toggle";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./alert-dialog";
+import { toast } from "sonner";
+import { Spinner } from "./spinner";
+import { deleteMultipleMustahikDataById } from "@/actions/delete-data";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,14 +57,47 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = useState({});
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
   });
+
+  const selectedRowsData = Object.values(
+    table.getSelectedRowModel().rowsById
+  ).map((row) => row.original as Mustahik);
+
+  const selectedRowsId = selectedRowsData.map((row) => row.id);
+
   return (
     <div>
+      {!isNotEmptyObject(rowSelection) ? (
+        <div className="flex justify-between mb-4">
+          <div className="space-x-2">
+            <Button
+              className="bg-foreground hover:bg-foreground/90"
+              onClick={() => table.toggleAllPageRowsSelected(true)}
+            >
+              Pilih Semua
+            </Button>
+            <Button
+              className=""
+              onClick={() => table.toggleAllPageRowsSelected(false)}
+              variant={"outline"}
+            >
+              Batal
+            </Button>
+          </div>
+          <DeleteRowsBtn table={table} selectedRowsId={selectedRowsId} />
+        </div>
+      ) : null}
       <div className="overflow-hidden rounded-xl border border-gray-400">
         <Table>
           <TableHeader className="bg-[#f4f4f4d1]">
@@ -105,7 +158,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between space-x-2 p-4">
+      <div className="flex flex-col gap-4 lg:flex-row items-center justify-center lg:justify-between lg:space-x-2 p-4">
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Baris per halaman</p>
           <Select
@@ -126,6 +179,12 @@ export function DataTable<TData, TValue>({
             </SelectContent>
           </Select>
         </div>
+        {!isNotEmptyObject(rowSelection) ? (
+          <div className="text-muted-foreground  text-sm">
+            {table.getFilteredSelectedRowModel().rows.length} dari{" "}
+            {table.getFilteredRowModel().rows.length} baris terpilih.
+          </div>
+        ) : null}
         <div className="flex items-center space-x-2">
           <Button
             size="icon"
@@ -150,5 +209,57 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
     </div>
+  );
+}
+
+function DeleteRowsBtn({
+  selectedRowsId,
+  table,
+}: {
+  selectedRowsId: (string | undefined)[];
+  table: TableType<any>;
+}) {
+  const [open, setOpen] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+
+  console.log(selectedRowsId);
+
+  return (
+    <AlertDialog open={open} onOpenChange={setOpen}>
+      <AlertDialogTrigger asChild>
+        <Button variant={"destructive"}>Hapus</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Apakah Anda yakin?</AlertDialogTitle>
+          <AlertDialogDescription>
+            data-data yang akan dihapus tidak dapat dikembalikan
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Batal</AlertDialogCancel>
+          <AlertDialogAction
+            disabled={isPending}
+            onClick={async () => {
+              setIsPending(true);
+              const res = await deleteMultipleMustahikDataById(selectedRowsId);
+              setIsPending(false);
+              if (res?.error && !res.success) {
+                toast.error(res.error);
+                table.toggleAllPageRowsSelected(false);
+                setOpen(false);
+                return;
+              }
+              toast.success(res?.success);
+              table.toggleAllPageRowsSelected(false);
+              setOpen(false);
+            }}
+            className="bg-foreground hover:bg-foreground/90"
+          >
+            {isPending ? <Spinner color="white" /> : "Oke"}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

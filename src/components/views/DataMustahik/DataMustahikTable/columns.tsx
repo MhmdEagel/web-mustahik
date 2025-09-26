@@ -8,12 +8,29 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ExternalLink, Pen, Trash } from "lucide-react";
 import Link from "next/link";
 import DeleteBtn from "./DeleteBtn/DeleteBtn";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 type MustahikTable = Omit<
   Mustahik,
   "jumlah_bantuan" | "nama_penerima_laporan" | "jenis_bantuan"
 >;
 export const columns: ColumnDef<MustahikTable>[] = [
+  {
+    id: "select",
+    cell: ({ row }) => (
+      <div className="px-1">
+
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      </div>
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "NIK",
     header: "NIK",
@@ -73,25 +90,34 @@ export const columns: ColumnDef<MustahikTable>[] = [
     cell: ({ row }) => {
       const { id } = row.original;
       return (
-        <div className="space-x-2 flex justify-center">
-          <DeleteBtn mustahikId={id} />
-          <Link href={`/dashboard/edit-data/${id}`}>
-            <Button
-              className="bg-[#157145] hover:bg-[#157145]/70"
-              size={"icon"}
-            >
-              <Pen />
-            </Button>
-          </Link>
-          <Link href={`/dashboard/detail-data/${id}`}>
-            <Button
-              className="bg-[#157145] hover:bg-[#157145]/70"
-              size={"icon"}
-            >
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button size={"icon"} className="bg-foreground hover:bg-foreground/90">
               <ExternalLink />
             </Button>
-          </Link>
-        </div>
+          </PopoverTrigger>
+          <PopoverContent side="left" className="w-fit" >
+            <div className="gap-4 flex flex-col">
+              <DeleteBtn mustahikId={id} />
+              <Link href={`/dashboard/edit-data/${id}`}>
+                <Button
+                variant={"ghost"}
+                >
+                  <Pen />
+                  Edit
+                </Button>
+              </Link>
+              <Link href={`/dashboard/detail-data/${id}`}>
+                <Button
+                  variant={"ghost"}
+                >
+                  <ExternalLink />
+                  Detail
+                </Button>
+              </Link>
+            </div>
+          </PopoverContent>
+        </Popover>
       );
     },
   },

@@ -37,7 +37,6 @@ async function main() {
     "ekonomi",
   ];
   const statusArr = ["terverifikasi", "belum_terverifikasi", "sudah_menerima"];
-
   await prisma.mustahik.createMany({
     data: Array.from({ length: 100 }).map(() => ({
       NIK: faker.string.numeric({ length: { min: 16, max: 16 } }),
@@ -77,6 +76,7 @@ async function main() {
       ] as IsOwned,
     })),
   });
+
 }
 main()
   .then(async () => {

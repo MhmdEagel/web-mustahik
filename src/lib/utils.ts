@@ -18,6 +18,14 @@ export function generateAlamatString(
   return `${namaJalan}, Kel. ${kelurahan}, Kec. ${kecamatan}, ${kotaKabupaten}`;
 }
 
+export function isNotEmptyObject(obj: any) {
+  if (typeof obj !== 'object' || obj === null) {
+    return false; 
+  }
+  return Object.keys(obj).length === 0;
+}
+
+
 export const moneyFormatter = Intl.NumberFormat("id-ID", {
   currency: "IDR",
   style: "currency",
