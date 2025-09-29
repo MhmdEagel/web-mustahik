@@ -12,6 +12,14 @@ async function main() {
   //   },
   // });
 
+  // await prisma.user.create({
+  //   data: {
+  //     email: "wagianto190617@gmail.com",
+  //     password: hashedPassword,
+  //   },
+  // });
+
+  
   // ### Seed Data Mustahik
   // await prisma.mustahik.create({
   //   data: {
@@ -76,7 +84,7 @@ async function main() {
       ] as IsOwned,
     })),
   });
-
+  
 }
 main()
   .then(async () => {
